@@ -215,7 +215,26 @@ def centralite(G, u):
     Returns:
         int: la distance maximale entre le sommet u et un autre sommet du graphe
     """
-    ...
+
+    if u not in G.nodes:
+        return None
+    
+    a_parcourir = [u]
+    distances = {u: 0}
+    distance_max = 0
+    
+    while a_parcourir:
+        courrant = a_parcourir.pop(0)
+        
+        for voisin in G[courrant]:
+            if voisin not in distances:
+                distances[voisin] = distances[courrant] + 1
+                a_parcourir.append(voisin)
+
+                if distances[voisin] > distance_max:
+                    distance_max = distances[voisin]
+
+    return distance_max
 
 
 def centre_hollywood(G):
