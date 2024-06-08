@@ -140,7 +140,8 @@ def est_proche(G, u, v, k=1):
     Returns:
         boolean: un boolean indiquant si les sommets sont à une distance k ou non
     """
-    ...
+
+    return v in collaborateurs_proches(G, u, k) if u in G.nodes and v in G.nodes else None
 
     
 def distance_naive(G, u, v):
@@ -154,7 +155,16 @@ def distance_naive(G, u, v):
     Returns:
         int: la distance entre les deux sommets
     """
-    ...
+    
+    if u not in G.nodes or v not in G.nodes:
+        return None
+    
+    if u == v:
+        return 0
+    
+    for k in range(1, nx.number_of_nodes(G)):
+        if est_proche(G, u, v, k):
+            return k
     
 
 def distance(G, u, v):
