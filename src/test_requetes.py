@@ -96,7 +96,10 @@ class test_case(unittest.TestCase):
         self.assertIsNone(res)
 
     def test_eloignement_max(self):
-        ...
+        res = r.eloignement_max(self.G)
+        self.assertEqual(res, 3)
+        res = r.centre_hollywood(nx.Graph())
+        self.assertIsNone(res)
 
 
 if __name__ == '__main__':
