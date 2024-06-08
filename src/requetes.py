@@ -246,7 +246,17 @@ def centre_hollywood(G):
     Returns:
         str: le sommet le plus central du graphe
     """
-    ...
+
+    min_centralite = None
+    centre = None
+    
+    for u in G.nodes:
+        c = centralite(G, u)
+        if min_centralite is None or c < min_centralite:
+            min_centralite = c
+            centre = u
+            
+    return centre
 
 
 def eloignement_max(G):
@@ -258,4 +268,12 @@ def eloignement_max(G):
     Returns:
         int: la plus grande distance entre deux sommet du graphe
     """
-    ...
+
+    max_centralite = None
+    
+    for u in G.nodes:
+        c = centralite(G, u)
+        if max_centralite is None or c > max_centralite:
+            max_centralite = c
+            
+    return max_centralite
