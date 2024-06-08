@@ -178,7 +178,31 @@ def distance(G, u, v):
     Returns:
         int: la distance entre les deux sommets
     """
-    ...
+
+    if u not in G.nodes or v not in G.nodes:
+        return None
+
+    if u == v:
+        return 0
+
+    niveau = 0
+    niveau_actuel = {u}
+    niveau_suivant = set()
+
+    while niveau_actuel:
+        courrant = niveau_actuel.pop()
+        
+        for voisin in G[courrant]:
+            if voisin not in niveau_actuel:
+                if voisin == v:
+                    return niveau + 1
+                
+                niveau_suivant.add(voisin)
+                
+        if not niveau_actuel:
+            niveau += 1
+            niveau_actuel = niveau_suivant
+            niveau_suivant = set()
 
 
 def centralite(G, u):
