@@ -14,8 +14,10 @@ class test_case(unittest.TestCase):
         self.G = nx.Graph(c.DICO_TEST)
 
     def test_json_vers_nx(self):
-        graphe = r.json_vers_nx(c.FIC_PATH / "data_test.txt")
-        self.assertEqual(graphe.adj, self.G.adj)
+        res = r.json_vers_nx(c.FIC_PATH / "data_test.txt")
+        self.assertEqual(res.adj, self.G.adj)
+        res = r.json_vers_nx("chemin/inconnu")
+        self.assertIsNone(res)
 
     def test_collaborateurs_communs(self):
         res = r.collaborateurs_communs(self.G, "a1", "d1")
