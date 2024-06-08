@@ -78,7 +78,23 @@ def collaborateurs_sujet(G, u, k):
     Returns:
         set: l'ensemble des collaborateurs proches de u à une distance k
     """
-    ...
+
+    if u not in G.nodes:
+        return None
+    
+    collaborateurs = set()
+    collaborateurs.add(u)
+
+    for i in range(k):
+        collaborateurs_directs = set()
+        for c in collaborateurs:
+            for voisin in G.adj[c]:
+                if voisin not in collaborateurs:
+                    collaborateurs_directs.add(voisin)
+
+        collaborateurs = collaborateurs.union(collaborateurs_directs)
+
+    return collaborateurs
 
 
 def collaborateurs_proches(G, u, k):
@@ -92,7 +108,24 @@ def collaborateurs_proches(G, u, k):
     Returns:
         set: l'ensemble des collaborateurs proches de u à une distance k
     """
-    ...
+
+    if u not in G.nodes:
+        return None
+    
+    collaborateurs = {u}
+    a_parcourir = {u}
+    
+    for _ in range(k):
+        seront_parcourus = set()
+        
+        for sommet in a_parcourir:
+            voisins = set(G.adj[sommet])
+            seront_parcourus |= voisins - collaborateurs
+            
+        collaborateurs |= seront_parcourus
+        a_parcourir = seront_parcourus
+    
+    return collaborateurs
 
     
 def est_proche(G, u, v, k=1):
