@@ -2,6 +2,27 @@ import json
 
 import networkx as nx
 
+import const as c
+
+
+def format_personne(personne):
+    """formate une chaine de caractère pour renvoyer uniquement le nom/prenom
+
+    Args:
+        personne (str): une chaine de caractère correspondant à une personne
+
+    Returns:
+        sre: une chaine de caractère nom/prenom
+    """
+
+    if '(' in personne:
+        personne = personne[:personne.index('(')]
+    
+    if '|' in personne:
+        personne = personne[:personne.index('|')]
+    
+    return personne.strip("[]").strip()
+
 
 def json_vers_nx(chemin):
     """converti un fichier json en graphe networkx
@@ -12,21 +33,23 @@ def json_vers_nx(chemin):
     Returns:
         nx.Graph: un graphe networkx correspondant au fichier
     """
-    ...
 
-
-def collaborateurs_communs(G, u, v):
-    """retourne les collaborateurs en communs de deux sommets d'un graphe
-
-    Args:
-        G (nx.Graph): un graphe networkx
-        u (str): un premier sommet du graphe
-        k (str): un second sommet du graphe
-
-    Returns:
-        set: l'ensemble des collaborateurs en commun de u et v
-    """
-    ...
+    G = nx.Graph()
+    
+    with open(file=chemin, mode='r', encoding='UTF-8') as fichier:
+        for ligne in fichier.readlines():
+            film = json.loads(ligne)
+            personnes = set()
+            
+            for metier in c.COLLABS:
+                personnes |= set(map(format_personne, film.get(metier, [])))
+            
+            for personne1 in personnes:
+                for personne2 in personnes:
+                    if personne1 != personne2 and not G.has_edge(personne1, personne2):
+                        G.add_edge(personne1, personne2)
+                        
+    return G
 
 
 def collaborateurs_sujet(G, u, k):
