@@ -52,6 +52,21 @@ def json_vers_nx(chemin):
     return G
 
 
+def collaborateurs_communs(G, u, v):
+    """retourne les collaborateurs en communs de deux sommets d'un graphe
+
+    Args:
+        G (nx.Graph): un graphe networkx
+        u (str): un premier sommet du graphe
+        k (str): un second sommet du graphe
+
+    Returns:
+        set: l'ensemble des collaborateurs en commun de u et v
+    """
+
+    return set(G[u]) & set(G[v]) if u in G.nodes and v in G.nodes else None
+
+
 def collaborateurs_sujet(G, u, k):
     """retourne l'ensemble des collaborateurs d'un sommet à une distance k (version donnée)
 
