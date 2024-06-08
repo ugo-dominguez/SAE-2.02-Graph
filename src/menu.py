@@ -218,12 +218,12 @@ def main():
         clear()
 
         if choix == 1:
-            u = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le nom et prénom d'un acteur: ")
+            u = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le prénom et nom d'un acteur: ")
             affiche_distance(G, u)
             
         elif choix == 2:
-            u = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le nom et prénom d'un premier acteur: ")
-            v = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le nom et prénom d'un second acteur: ")
+            u = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le prénom et nom d'un premier acteur: ")
+            v = saisir_texte(set(G.nodes()), "\nVeuillez renseigner le prénom et nom d'un second acteur: ")
             affiche_distance(G, u, v)
             
         elif choix == 3:
