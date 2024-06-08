@@ -78,7 +78,16 @@ class test_case(unittest.TestCase):
         self.assertIsNone(res)
 
     def test_centralite(self):
-        ...
+        res = r.centralite(self.G, "a1")
+        self.assertEqual(res, 2)
+        res = r.centralite(self.G, "a5")
+        self.assertEqual(res, 2)
+        res = r.centralite(self.G, "p5")
+        self.assertEqual(res, 3)
+        res = r.centralite(self.G, "a7")
+        self.assertEqual(res, 3)
+        res = r.centralite(self.G, "z5")
+        self.assertIsNone(res)
 
     def test_centre_hollywood(self):
         ...
