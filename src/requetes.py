@@ -36,20 +36,24 @@ def json_vers_nx(chemin):
 
     G = nx.Graph()
     
-    with open(file=chemin, mode='r', encoding='UTF-8') as fichier:
-        for ligne in fichier.readlines():
-            film = json.loads(ligne)
-            personnes = set()
-            
-            for metier in c.COLLABS:
-                personnes |= set(map(format_personne, film.get(metier, [])))
-            
-            for personne1 in personnes:
-                for personne2 in personnes:
-                    if personne1 != personne2 and not G.has_edge(personne1, personne2):
-                        G.add_edge(personne1, personne2)
-                        
-    return G
+    try:
+        with open(file=chemin, mode='r', encoding='UTF-8') as fichier:
+            for ligne in fichier.readlines():
+                film = json.loads(ligne)
+                personnes = set()
+                
+                for metier in c.COLLABS:
+                    personnes |= set(map(format_personne, film.get(metier, [])))
+                
+                for personne1 in personnes:
+                    for personne2 in personnes:
+                        if personne1 != personne2 and not G.has_edge(personne1, personne2):
+                            G.add_edge(personne1, personne2)
+        
+        return G
+    
+    except:
+        print('Le chemin vers le fichier est introuvable.')
 
 
 def collaborateurs_communs(G, u, v):
