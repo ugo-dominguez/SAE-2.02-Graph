@@ -42,7 +42,16 @@ class test_case(unittest.TestCase):
         self.assertIsNone(res)
 
     def test_est_proche(self):
-        ...
+        res = r.est_proche(self.G, "a1", "a1", 0)
+        self.assertTrue(res)
+        res = r.est_proche(self.G, "a1", "a2")
+        self.assertTrue(res)
+        res = r.est_proche(self.G, "a1", "a2", 2)
+        self.assertTrue(res)
+        res = r.est_proche(self.G, "a6", "a7", 2)
+        self.assertFalse(res)
+        res = r.est_proche(self.G, "z5", "z6")
+        self.assertIsNone(res)
 
     def test_distance_naive(self):
         ...
