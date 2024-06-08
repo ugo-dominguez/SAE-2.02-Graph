@@ -66,7 +66,16 @@ class test_case(unittest.TestCase):
         self.assertIsNone(res)
 
     def test_distance(self):
-        ...
+        res = r.distance(self.G, "a1", "a1")
+        self.assertEqual(res, 0)
+        res = r.distance(self.G, "a1", "a2")
+        self.assertEqual(res, 1)
+        res = r.distance(self.G, "a2", "a5")
+        self.assertEqual(res, 2)
+        res = r.distance(self.G, "p5", "a7")
+        self.assertEqual(res, 3)
+        res = r.distance(self.G, "z5", "z6")
+        self.assertIsNone(res)
 
     def test_centralite(self):
         ...
