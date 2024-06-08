@@ -30,7 +30,16 @@ class test_case(unittest.TestCase):
         self.assertIsNone(res)
 
     def test_collaborateurs_proches(self):
-        ...
+        res = r.collaborateurs_sujet(self.G, "a1", 0)
+        self.assertEqual(res, r.collaborateurs_proches(self.G, "a1", 0))
+        res = r.collaborateurs_sujet(self.G, "a1", 1)
+        self.assertEqual(res, r.collaborateurs_proches(self.G, "a1", 1))
+        res = r.collaborateurs_sujet(self.G, "a1", 2)
+        self.assertEqual(res, r.collaborateurs_proches(self.G, "a1", 2))
+        res = r.collaborateurs_sujet(self.G, "a1", 3)
+        self.assertEqual(res, r.collaborateurs_proches(self.G, "a1", 3))
+        res = r.collaborateurs_proches(self.G, "z5", 1)
+        self.assertIsNone(res)
 
     def test_est_proche(self):
         ...
