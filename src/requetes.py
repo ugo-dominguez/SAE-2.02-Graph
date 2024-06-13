@@ -281,3 +281,14 @@ def eloignement_max(G):
             max_centralite = c
             
     return max_centralite
+
+
+G = json_vers_nx(c.FIC_PATH / "data_100.txt")
+print(collaborateurs_communs(G, "Al Pacino", "Matt Damon"))
+print(collaborateurs_proches(G, "Matt Damon", 1))
+print(est_proche(G, "Al Pacino", "Matt Damon", 2))
+print(distance_naive(G, "Al Pacino", "Matt Damon"))
+print(distance(G, "Al Pacino", "Matt Damon"))
+print(centralite(G, "Al Pacino"))
+print(centre_hollywood(G))
+print(eloignement_max(G))
